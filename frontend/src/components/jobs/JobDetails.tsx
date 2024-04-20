@@ -56,7 +56,7 @@ const JobDetails = () => {
         align={'center'}
         justify={'flex-start'}
         bg={useColorModeValue('gray.50', 'gray.900')}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={6} px={6} alignItems={'center'}>
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={4} px={4} alignItems={'center'}>
             <Stack align={'center'}>
                   <Heading fontSize={'3xl'}>Job Details</Heading>
             </Stack>

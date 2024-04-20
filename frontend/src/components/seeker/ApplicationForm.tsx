@@ -4,12 +4,10 @@ import {
   Box,
   Heading,
   useColorModeValue,
-  FormLabel,
   FormControl,
   HStack,
   Input,
   Textarea,
-  Text,
   Button
 } from "@chakra-ui/react"
 import axios from "axios"
@@ -22,22 +20,22 @@ const ApplicationForm = () => {
   const [email,setEmail] = useState<string>("")
   const [phone,setPhone] = useState<string>("")
   const [github,setGithub] = useState<string>("")
-  const [coverletter,setCoverletter] = useState<string>("")
+  const [coverLetter,setCoverLetter] = useState<string>("")
   const [resume,setResume] = useState<File>()
   
 
-  const [errMsg,setErrMsg] = useState<string>("")
+  const [errMsg,setErrMsg] = useState<boolean>(false)
 
   const { id } = useParams()
 
   const validate = (email: string,name: string, phone: string):boolean=>{
 
     const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    if(validRegex.test(email) && name.length>=0 && phone.length===10 && coverletter.length>=10) {
+    if(validRegex.test(email) && name.length>=0 && phone.length===10 && coverLetter.length>=10) {
 
       return true
     }else{
-      setErrMsg("Invalid credentails. Please fill all the fields properly.")
+      setErrMsg(true)
       return false
     }
   }
@@ -52,27 +50,30 @@ const ApplicationForm = () => {
         formData.append("email", email);
         formData.append("phone", phone);
         formData.append("github", github);
-        formData.append("coverLetter", coverletter);
+        formData.append("coverLetter", coverLetter);
         formData.append("resume", resume);
         formData.append("jobId",id!)
   
         const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/application/apply`,formData,{
         withCredentials:true
         })
+
+        console.log(res)
       }
+
+
+    } catch (error) {
+      console.log("error when sending request; ",error)
+      return
+    }
 
       setName("")
       setEmail("")
       setPhone("")
       setGithub("")
-      setCoverletter("")
+      setCoverLetter("")
       setResume(undefined)
-      setErrMsg("")
-
-    } catch (error) {
-      console.log("error when sending request; ",error)
-    }
-
+      setErrMsg(false)
 
   }
 
@@ -97,55 +98,45 @@ const ApplicationForm = () => {
                 <Stack spacing={8}>
                     <FormControl isRequired>
                       <HStack>
-                        <FormLabel>
-                          Name:
-                        </FormLabel>
-                        <Input size={'sm'}  value={name} onChange={(e)=> {setName(e.target.value)}} />
+      
+                        <Input size={'sm'} placeholder={'Name'} value={name} onChange={(e)=> {setName(e.target.value)}} />
                       </HStack>
                     </FormControl>
 
                     <FormControl isRequired>
                       <HStack>
-                        <FormLabel>
-                          PhoneNo:
-                        </FormLabel>
-                        <Input size={'sm'}  type='number'  value={phone} onChange={(e)=> setPhone(e.target.value)} />
+
+                        <Input size={'sm'} placeholder="Phone number" type='number'  value={phone} onChange={(e)=> setPhone(e.target.value)} />
                       </HStack>
                     </FormControl>
 
                     <FormControl isRequired>
                       <HStack>
-                        <FormLabel>
-                          Email:
-                        </FormLabel>
-                        <Input size={'sm'} value={email} onChange={(e)=> {setEmail(e.target.value)}} />
+        
+                        <Input size={'sm'} placeholder="Email" value={email} onChange={(e)=> {setEmail(e.target.value)}} />
                       </HStack>
                     </FormControl>
 
 
                     <FormControl isRequired>
                       <HStack>
-                        <FormLabel>
-                          GitHub:
-                        </FormLabel>
-                        <Input size={'sm'} value={github} onChange={(e)=> setGithub(e.target.value)} />
+
+                        <Input size={'sm'} placeholder="Github" value={github} onChange={(e)=> setGithub(e.target.value)} />
                       </HStack>
                     </FormControl>
 
-                    <Textarea placeholder='Cover Letter' value={coverletter} onChange={(e)=> setCoverletter(e.target.value)} h={'200px'} resize={'vertical'}/>
+                    <Textarea placeholder='Cover Letter' value={coverLetter} onChange={(e)=> setCoverLetter(e.target.value)} h={'200px'} resize={'vertical'}/>
                     
                     <FormControl isRequired>
                       <HStack>
-                        <Text>
-                          Upload Resume:
-                        </Text>
+  
                         <input type="file" onChange={(e)=>{setResume(e.target.files![0])}}/>
                       </HStack>
                     </FormControl>
 
                     {
                     errMsg?(
-                      <p style={{color:'red'}}>{errMsg}</p>
+                      <p style={{color:'red'}}>Invalid credentails.</p>
                     ):(
                       null
                     )
