@@ -93,7 +93,7 @@ export default function Header() {
 
   const {user,isAuthorized,setIsAuthorized} = useContext(Context)
 
-  const Links = user.role==="Job Seeker"? seekerLinks : employerLinks
+  const Links = user.role==="Job Seeker"? seekerLinks:user.role==="Employer"? employerLinks : []
 
   const logOutHandler = async()=>{
     try {
@@ -125,7 +125,7 @@ export default function Header() {
               display={{ md: 'none' }}
               onClick={isOpen ? onClose : onOpen}
             />
-            <HStack spacing={0} alignItems={'center'} justifyContent={'space-between'} w={'58%'}>
+            <HStack spacing={0} alignItems={'center'} justifyContent={'space-between'} w={'59%'}>
               <Box fontSize={'larger'} fontWeight={'500'} fontFamily={'"Archivo Black", sans-serif'}>Job Board</Box>
               <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                 {Links.map((i) => (

@@ -11,8 +11,9 @@ import {
   Button
 } from "@chakra-ui/react"
 import axios from "axios"
-import { MouseEvent, useState } from "react"
-import { useParams } from "react-router-dom"
+import { MouseEvent, useContext, useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { Context } from "../../App"
 
 const ApplicationForm = () => {
 
@@ -27,6 +28,9 @@ const ApplicationForm = () => {
   const [errMsg,setErrMsg] = useState<boolean>(false)
 
   const { id } = useParams()
+
+  const navigate = useNavigate();
+  const {isAuthorized} = useContext(Context)
 
   const validate = (email: string,name: string, phone: string):boolean=>{
 
@@ -59,23 +63,30 @@ const ApplicationForm = () => {
         })
 
         console.log(res)
+        setName("")
+        setEmail("")
+        setPhone("")
+        setGithub("")
+        setCoverLetter("")
+        setResume(undefined)
+        setErrMsg(false)
+      }else{
+        setErrMsg(true)
       }
-
 
     } catch (error) {
       console.log("error when sending request; ",error)
       return
     }
-
-      setName("")
-      setEmail("")
-      setPhone("")
-      setGithub("")
-      setCoverLetter("")
-      setResume(undefined)
-      setErrMsg(false)
-
   }
+
+  useEffect(() => {
+    if(!isAuthorized){
+      navigate("/login")
+    }
+
+  }, [isAuthorized])
+
 
   return (
       <div className="applicationForm">
@@ -137,10 +148,10 @@ const ApplicationForm = () => {
                     {
                     errMsg?(
                       <p style={{color:'red'}}>Invalid credentails.</p>
-                    ):(
-                      null
+                      ):(
+                        null
                     )
-                  }
+                   }
 
                   <Button
                     bg={'teal.400'}

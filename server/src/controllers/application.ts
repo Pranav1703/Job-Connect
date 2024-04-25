@@ -10,7 +10,7 @@ export const apply = asyncHandler(async(req,res,next)=>{
         name,
         email,
         phone,
-        github,
+        github: gitHub,
         coverLetter,
         jobId
     } = req.body
@@ -19,11 +19,11 @@ export const apply = asyncHandler(async(req,res,next)=>{
     if(!job){
         return next(new Error("job doesnt exist"))
     }
-    const applicantId = {
+    const applicantID = {
         user: req.body.user._id,
         role: "Job Seeker"
     }
-    const employerId = {
+    const employerID = {
         user: job.postedBy,
         role: "Employer"
     }
@@ -36,12 +36,12 @@ export const apply = asyncHandler(async(req,res,next)=>{
     if(!name || 
         !email ||
         !phone ||
-        !github||
+        !gitHub||
         !coverLetter ||
         !resumePath ||
         !jobId ||
-        !applicantId ||
-        !employerId
+        !applicantID ||
+        !employerID
     ){
         return next(new Error("provide all detials"))
     }
@@ -51,10 +51,10 @@ export const apply = asyncHandler(async(req,res,next)=>{
         email,
         coverLetter,
         phone,
-        github,
+        gitHub,
         resumePath,
-        applicantId,
-        employerId
+        applicantID,
+        employerID
     })
 
     res.json({

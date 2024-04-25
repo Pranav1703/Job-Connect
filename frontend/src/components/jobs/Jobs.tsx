@@ -23,6 +23,8 @@ const Jobs = () => {
 
   }
 
+
+
   useEffect(() => {
    try {
     axios
@@ -32,14 +34,18 @@ const Jobs = () => {
       .then((res)=>{
         console.log(res.data)
         setJobs(res.data.jobs)
-      })
+      })    
+
+    if(!isAuthorized){
+      navigate("/login")
+    }
 
    } catch (error) {
     console.log("couldnt fetch data: ",error)
    }
 
 
-  }, [])
+  }, [isAuthorized])
 
   if(!isAuthorized){
     navigate("/login")
@@ -48,7 +54,7 @@ const Jobs = () => {
 
   return (
     <>
-      <Box m={'1vw'} p={'1vw'} w={'100%'}>
+      <Box m={'1vw'} p={'1vw'} w={'100%'} ml={'0'}>
         <InputGroup size='lg' marginLeft={'25%'} w={'55%'}>
           <Input placeholder='Search' />
           <InputRightAddon onClick={()=>search}>

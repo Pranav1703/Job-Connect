@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 const token_secret = process.env.TOKEN_SECRET as string
 const token_expiry = process.env.TOKEN_EXPIRY as string
 
-interface IUser extends Document {
+interface User extends Document {
     username: string;
     email: string;
     password: string;
@@ -14,7 +14,7 @@ interface IUser extends Document {
     generateToken(): string;
 }
 
-const UserSchema = new mongoose.Schema<IUser>(
+const UserSchema = new mongoose.Schema<User>(
     {
         username: {
             type: String,

@@ -26,7 +26,7 @@ const JobCard = ({_id,title,companyName,locationType,minSalary,maxSalary,descrip
   
   return (
 
-    <Card minW={'sm'} maxW={'sm'} _hover={{boxShadow:'0 0 11px rgba(35,35,35,.3)'}} transition={'all 0.5s'} m={'1vw'} userSelect={'none'}>
+    <Card minW={'sm'} maxW={'sm'} bg={'rgb(253, 253, 255)'} _hover={{boxShadow:'0 0 11px rgba(35,35,35,.3)'}} transition={'all 0.5s'} m={'1vw'} userSelect={'none'}>
         <CardHeader mb={'-15px'}>
           <Heading size='md'> {title}</Heading>
           <Text fontSize={'xs'} mt={'5px'}> {companyName}</Text>

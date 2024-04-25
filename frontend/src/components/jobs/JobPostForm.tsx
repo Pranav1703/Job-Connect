@@ -14,9 +14,11 @@ import {
   NumberInputField,
   Button,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { Context } from '../../App';
 
 const JobPostForm = () => {
 
@@ -33,6 +35,9 @@ const JobPostForm = () => {
   const format = (val:string) => `₹` + val
   const parse = (val:string) => val.replace(/^\₹/, '')
   
+  const {isAuthorized} = useContext(Context)
+  const navigate = useNavigate()
+
   const submitHandler = async(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
     event.preventDefault()
     try {
@@ -63,6 +68,16 @@ const JobPostForm = () => {
       console.log("error when posting a job: ",error)
     }
   }
+
+  
+
+
+  useEffect(() => {
+    if(!isAuthorized){
+      navigate("/login")
+    }
+
+  }, [isAuthorized])
 
   return (
     <>

@@ -29,7 +29,7 @@ const LogIn = () => {
   const submitHandler = async(event:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     event.preventDefault()
 
-    console.log("sign in details-----")
+    console.log("login details-----")
     console.log("email: ",email)
     console.log("password: ",password)
 

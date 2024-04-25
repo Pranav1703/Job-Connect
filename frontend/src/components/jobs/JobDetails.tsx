@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import { Context } from "../../App"
 
 const JobDetails = () => {
@@ -26,7 +26,9 @@ const JobDetails = () => {
   const [postedBy,setPostedBy] = useState<string>("")
   
   let { id } = useParams();
-  const {user} =useContext(Context)
+  const {user,isAuthorized} =useContext(Context)
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     axios
@@ -44,9 +46,14 @@ const JobDetails = () => {
         setDescription(res.data.job.description)
         setPostedBy(res.data.job.postedBy.username)
       })
-      .catch((err)=>console.log(err))
+      .catch((err)=>console.log(err)
+    )
+
+    if(!isAuthorized){
+      navigate("/login")
+    }
     
-  }, [])
+  }, [isAuthorized])
   
 
   return (
