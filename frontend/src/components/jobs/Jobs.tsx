@@ -19,8 +19,10 @@ const Jobs = () => {
   const {isAuthorized} = useContext(Context)
   const navigate = useNavigate()
 
-  const searchJobs = ()=>{
-
+  const searchJobs = (e: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
+    jobs?.filter((i)=>{
+       return search.includes(i.title)
+    })
   }
 
 
@@ -56,8 +58,8 @@ const Jobs = () => {
     <>
       <Box m={'1vw'} p={'1vw'} w={'100%'} ml={'0'}>
         <InputGroup size='lg' marginLeft={'25%'} w={'55%'}>
-          <Input placeholder='Search' />
-          <InputRightAddon onClick={()=>search}>
+          <Input placeholder='Search Jobs' />
+          <InputRightAddon onClick={(event)=>searchJobs(event)}>
             Search
           </InputRightAddon>
         </InputGroup>

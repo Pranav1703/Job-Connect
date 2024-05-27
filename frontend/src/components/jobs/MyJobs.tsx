@@ -1,13 +1,11 @@
 import { 
     Box,
     Flex,
-    Stack,
     Spinner
 } from "@chakra-ui/react"
 import EmployerJobCard from "./EmployerJobCard"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
-import { Toaster } from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
 import { Context } from "../../App"
 
@@ -34,10 +32,10 @@ const MyJobs = () => {
       }
   }, [isAuthorized])
   
-    //setMyJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
+    
   return (
     <Box m={'1vw'} p={'1vw'} w={'100%'}>
-      <Toaster/>
+     
       <Flex m={'1vw'} direction={'column'}>
         {
           myJobs?(

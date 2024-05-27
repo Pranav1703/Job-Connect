@@ -22,7 +22,7 @@ const ApplicationForm = () => {
   const [phone,setPhone] = useState<string>("")
   const [github,setGithub] = useState<string>("")
   const [coverLetter,setCoverLetter] = useState<string>("")
-  const [resume,setResume] = useState<File>()
+  const [resume,setResume] = useState<File | undefined>()
   
 
   const [errMsg,setErrMsg] = useState<boolean>(false)
@@ -53,16 +53,15 @@ const ApplicationForm = () => {
         formData.append("name", name);
         formData.append("email", email);
         formData.append("phone", phone);
-        formData.append("github", github);
+        formData.append("gitHub", github);
         formData.append("coverLetter", coverLetter);
         formData.append("resume", resume);
-        formData.append("jobId",id!)
+        formData.append("jobID",id!)
   
-        const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/application/apply`,formData,{
+        await axios.post(`${import.meta.env.VITE_SERVER_URL}/application/apply`,formData,{
         withCredentials:true
         })
 
-        console.log(res)
         setName("")
         setEmail("")
         setPhone("")
@@ -70,6 +69,7 @@ const ApplicationForm = () => {
         setCoverLetter("")
         setResume(undefined)
         setErrMsg(false)
+        setResume(undefined)
       }else{
         setErrMsg(true)
       }

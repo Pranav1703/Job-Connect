@@ -10,11 +10,12 @@ import { isAuthorized } from "./middleware/auth.js";
 import ApplicationRouter from "./routes/ApplicationRoutes.js"
 
 const PORT = 3000;
-const mongoUrl = process.env.MONGO_URL as string
+const mongoUrl = process.env.MONGO_URL as string;
 
 const app = express();
 
 app.use("/assets",express.static('assets'));
+app.use("/storage",express.static('src/storage'));
 
 app.use(bodyParser.json())
 app.use(cookieParser())

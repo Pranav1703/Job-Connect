@@ -38,7 +38,7 @@ const seekerLinks = [
   },
   {
     link: "My Applications",
-    path:"/applications"
+    path:"/myapplications"
   }
 ]
 
@@ -61,7 +61,7 @@ const employerLinks = [
   },
   {
     link: "Applicants",
-    path:"/applicants"
+    path:"/myapplicants"
   }
 ]
 

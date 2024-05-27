@@ -11,7 +11,9 @@ import {  createContext, useState} from 'react'
 import Header from './components/Header'
 import JobDetails from './components/jobs/JobDetails'
 import MyJobs from './components/jobs/MyJobs'
-import MyApplications from './components/applications/MyApplications'
+import SeekerApplications from './components/applications/SeekerApplications'
+import EmployerApplications from './components/applications/EmployerApplications'
+import { Toaster } from 'react-hot-toast'
 
 export const Context = createContext({
   isAuthorized: false,
@@ -30,6 +32,7 @@ function App() {
     <Context.Provider value={{ isAuthorized, setIsAuthorized, user, setUser}}>
       <Router>
         <Header/>
+        <Toaster/>
         <Routes>
           <Route path={'/signup'} element={<SignUp/>} />
           <Route path={'/login'} element={<LogIn/>} />
@@ -39,7 +42,8 @@ function App() {
           <Route path={'/application/:id'} element={<ApplicationForm/>} />
           <Route path={'/postjob'} element={<JobPostForm/>} />
           <Route path={'/myjobs'} element={<MyJobs/>} />
-          <Route path={'/applications'} element={<MyApplications/>}/>
+          <Route path={'/myapplications'} element={<SeekerApplications/>}/>
+          <Route path={'/myapplicants'} element={<EmployerApplications/>}/>
         </Routes>
       </Router>
     </Context.Provider>
