@@ -9,12 +9,15 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    Link
+    Link,
+    InputGroup,
+    InputRightElement
   } from '@chakra-ui/react'
 import axios from 'axios'
 import { useContext, useState } from 'react'
 import { Context } from '../../App'
 import { useNavigate } from 'react-router-dom'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 
 const LogIn = () => {
@@ -22,6 +25,7 @@ const LogIn = () => {
   const [email,setEmail] = useState<string>("")
   const [password,setPassword] = useState<string>("")
   const [isInvalid,setIsinValid] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const { setIsAuthorized, setUser} = useContext(Context)
   const navigate = useNavigate()
@@ -87,7 +91,16 @@ const LogIn = () => {
                 {/* password */}
                 <FormControl id="password" >
                   <FormLabel>Password</FormLabel>
-                  <Input type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                  <InputGroup>
+                    <Input type={showPassword ? 'text' : 'password'} value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                    <InputRightElement h={'full'}>
+                      <Button
+                        variant={'ghost'}
+                        onClick={() => setShowPassword((showPassword) => !showPassword)}>
+                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
 
                 </FormControl>
                 {

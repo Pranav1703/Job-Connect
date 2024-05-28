@@ -4,13 +4,14 @@ import { Input,
   InputGroup,
   Flex, 
   Box,
-  Spinner
+  Spinner,
+  Button
 } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { Context } from "../../App"
 import { useNavigate } from "react-router-dom"
-
+ 
 
 const Jobs = () => {
 
@@ -19,10 +20,12 @@ const Jobs = () => {
   const {isAuthorized} = useContext(Context)
   const navigate = useNavigate()
 
-  const searchJobs = (e: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
+  const searchJobs = ()=>{
     jobs?.filter((i)=>{
        return search.includes(i.title)
     })
+    setJobs(jobs)
+    console.log(jobs)
   }
 
 
@@ -34,7 +37,6 @@ const Jobs = () => {
         {withCredentials:true}
       )
       .then((res)=>{
-        console.log(res.data)
         setJobs(res.data.jobs)
       })    
 
@@ -58,9 +60,12 @@ const Jobs = () => {
     <>
       <Box m={'1vw'} p={'1vw'} w={'100%'} ml={'0'}>
         <InputGroup size='lg' marginLeft={'25%'} w={'55%'}>
-          <Input placeholder='Search Jobs' />
-          <InputRightAddon onClick={(event)=>searchJobs(event)}>
+          <Input placeholder='Search Jobs' onChange={(e)=>setSeatch(e.target.value)}/>
+          <InputRightAddon p={0}>
+          <Button w={'100%'} onClick={()=>searchJobs()}>
             Search
+          </Button>
+            
           </InputRightAddon>
         </InputGroup>
         <Flex flexWrap={'wrap'} mt={'20px'}>
