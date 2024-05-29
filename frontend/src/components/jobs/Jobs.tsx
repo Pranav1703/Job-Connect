@@ -1,11 +1,9 @@
 import JobCard from "./JobCard"
 import { Input, 
-  InputRightAddon,
   InputGroup,
   Flex, 
   Box,
   Spinner,
-  Button
 } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
@@ -41,9 +39,9 @@ const Jobs = () => {
       .then((res)=>{
         setJobs(res.data.jobs)
       })    
-    // if(!isAuthorized){
-    //   navigate("/login")
-    // }
+    if(!isAuthorized){
+      navigate("/login")
+    }
 
    } catch (error) {
     console.log("couldnt fetch data: ",error)
@@ -52,9 +50,6 @@ const Jobs = () => {
 
   }, [isAuthorized])
 
-  // if(!isAuthorized){
-  //   navigate("/login")
-  // }
 
 
   return (
