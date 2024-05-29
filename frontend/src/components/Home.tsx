@@ -13,7 +13,7 @@ const Home = () => {
   const navigate = useNavigate()
 
 
-  console.log("current auth status",isAuthorized,":",user)
+  console.log("current auth status",user,":",isAuthorized)
 
   const test = async()=>{
     const resposne = await axios.get("http://localhost:3000/test",{ withCredentials:true })

@@ -33,10 +33,6 @@ const LogIn = () => {
   const submitHandler = async(event:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     event.preventDefault()
 
-    console.log("login details-----")
-    console.log("email: ",email)
-    console.log("password: ",password)
-
     try {
       const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user/login`,{
         email,

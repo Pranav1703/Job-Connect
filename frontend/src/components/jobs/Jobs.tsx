@@ -20,15 +20,17 @@ const Jobs = () => {
   const {isAuthorized} = useContext(Context)
   const navigate = useNavigate()
 
-  const searchJobs = ()=>{
-    jobs?.filter((i)=>{
-       return search.includes(i.title)
+  const searchJobs = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    setSeatch(e.target.value);
+    const filteredJobs = jobs?.filter((job)=>{
+       return (job.title.toLowerCase().includes(search.toLowerCase())) || 
+              (job.companyName.toLowerCase().includes(search.toLowerCase())) || 
+              (job.locationType.toLowerCase().includes(search.toLowerCase()))
     })
-    setJobs(jobs)
-    console.log(jobs)
+    console.log(jobs && jobs[0].jobPostedOn)
+    setJobs(filteredJobs)
+    
   }
-
-
 
   useEffect(() => {
    try {
@@ -39,10 +41,9 @@ const Jobs = () => {
       .then((res)=>{
         setJobs(res.data.jobs)
       })    
-
-    if(!isAuthorized){
-      navigate("/login")
-    }
+    // if(!isAuthorized){
+    //   navigate("/login")
+    // }
 
    } catch (error) {
     console.log("couldnt fetch data: ",error)
@@ -51,22 +52,16 @@ const Jobs = () => {
 
   }, [isAuthorized])
 
-  if(!isAuthorized){
-    navigate("/login")
-  }
+  // if(!isAuthorized){
+  //   navigate("/login")
+  // }
 
 
   return (
     <>
       <Box m={'1vw'} p={'1vw'} w={'100%'} ml={'0'}>
         <InputGroup size='lg' marginLeft={'25%'} w={'55%'}>
-          <Input placeholder='Search Jobs' onChange={(e)=>setSeatch(e.target.value)}/>
-          <InputRightAddon p={0}>
-          <Button w={'100%'} onClick={()=>searchJobs()}>
-            Search
-          </Button>
-            
-          </InputRightAddon>
+          <Input placeholder='Search Jobs' value={search} onChange={(e)=>searchJobs(e)}/>
         </InputGroup>
         <Flex flexWrap={'wrap'} mt={'20px'}>
           {
@@ -79,6 +74,7 @@ const Jobs = () => {
                         minSalary={ele.MinSalary}
                         maxSalary={ele.MaxSalary}
                         description={ele.description}
+                        jobPostedOn={ele.jobPostedOn}
                         />
             ))
           ):(

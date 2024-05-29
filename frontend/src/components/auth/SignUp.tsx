@@ -56,12 +56,6 @@ const SignUp = () => {
     event.preventDefault()
     if(validate(email,role,password,username)){
       
-      console.log("sign up details-----")
-      console.log("Username :",username)
-      console.log("role: ",role)
-      console.log("Email: ",email)
-      console.log("Password: ",password)
-
       try {
         const response = await axios.post(`${server_url}/user/signup`,{
           username,
