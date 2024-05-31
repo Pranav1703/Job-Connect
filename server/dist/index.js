@@ -15,10 +15,12 @@ app.use("/storage", express.static('src/storage'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({
+const corsOptions = {
     origin: process.env.CORS_ORIGIN,
     credentials: true
-}));
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 mongoose
     .connect(mongoUrl, {
     dbName: "jobBoardDb",
