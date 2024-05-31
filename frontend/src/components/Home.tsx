@@ -1,4 +1,3 @@
-// import {Box,Flex} from "@chakra-ui/react"
 import { useContext, useEffect } from "react";
 import "../styles/Home.css"
 import { Context } from "../App";

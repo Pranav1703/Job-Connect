@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { Context } from "../../App"
 import ApplicationCard from "./ApplicationCard"
 import {
-  Flex,
   Heading,
   Stack,
   VStack,
@@ -13,7 +12,7 @@ import axios from "axios"
 const SeekerApplications = () => {
 
   const [myApplications,setMyApplications] = useState<Array<any>>()
-  const {isAuthorized,user} = useContext(Context)
+  const {isAuthorized} = useContext(Context)
   const navigate = useNavigate()
 
   useEffect(() => {

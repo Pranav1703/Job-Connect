@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { Context } from "../../App"
 import ApplicationCard from "./ApplicationCard"
 import {
-  Flex,
   Heading,
   Stack,
   VStack,
