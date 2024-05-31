@@ -16,11 +16,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
+    origin: "*",
     credentials: true
 };
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 mongoose
     .connect(mongoUrl, {
     dbName: "jobBoardDb",
