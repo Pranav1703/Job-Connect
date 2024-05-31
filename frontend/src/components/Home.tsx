@@ -4,6 +4,7 @@ import "../styles/Home.css"
 import { Context } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 
 const Home = () => {
@@ -35,7 +36,7 @@ const Home = () => {
 
         <div className="mainSection">
             <div id="txt">
-              <h1>Welcome to JOB BOARD </h1>
+              <h1>Welcome to JOB CONNECT </h1>
               <br />
               <p>
                 Where Opportunities Meet Talent! Discover your next career move <br />
@@ -47,12 +48,7 @@ const Home = () => {
           <img src="http://localhost:3000/assets/student2.png" id="homeImg" />
         </div>
 
-        <div className="featured">
-          <h1>Featured Jobs</h1>
-          <button onClick={()=>test()}>test</button>
-          full - horizontal
-          responsive - vertical
-        </div>
+        <Footer/>
 
       </div>
     </>

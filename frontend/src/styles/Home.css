@@ -10,9 +10,11 @@
     background: linear-gradient(117deg, rgb(14, 130, 90) 0%,rgb(216, 216, 216) 65%);;
     display: flex;
     justify-content: space-around;
-    max-height: 500px;
+    
     user-select: none;
     box-sizing: border-box;
+    height: 520px;
+    max-height: 700px;
 }
 
 #txt{

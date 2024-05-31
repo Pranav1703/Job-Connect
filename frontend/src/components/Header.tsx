@@ -109,13 +109,6 @@ export default function Header() {
 
   return (
     <>
-      {/* {
-        isAuthorized?(
-
-        ):(
-          <></>
-        )
-      } */}
         <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} className={isAuthorized?'show':"hide"}>
           <Flex h={20} alignItems={'center'} justifyContent={'space-between'} >
             <IconButton
@@ -126,7 +119,7 @@ export default function Header() {
               onClick={isOpen ? onClose : onOpen}
             />
             <HStack spacing={0} alignItems={'center'} justifyContent={'space-between'} w={'59%'}>
-              <Box fontSize={'larger'} fontWeight={'500'} fontFamily={'"Archivo Black", sans-serif'}>Job Board</Box>
+              <Box fontSize={'larger'} fontWeight={'500'} fontFamily={'"Archivo Black", sans-serif'}>Job Connect</Box>
               <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                 {Links.map((i) => (
                   <NavLink key={i.link} href={i.path}>{i.link}</NavLink>
@@ -135,23 +128,6 @@ export default function Header() {
             </HStack>
             <Flex alignItems={'center'} gap={'8px'}>
               
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
-                  minW={0}
-                  >
-                    <Text mr={'15px'}>My Profile</Text>
-                  
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Dash Board</MenuItem>
-                  <MenuDivider />
-                  <MenuItem>LogOut</MenuItem>
-                </MenuList>
-              </Menu>
               
               <Button        
                 variant={'solid'}
