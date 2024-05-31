@@ -44,7 +44,7 @@ const Home = () => {
                 Find the perfect candidate to join your team. Start your journey today!
               </p>     
             </div>    
-          <img src="https://localhost:3000/assets/student2.png" id="homeImg" />
+          <img src={`${import.meta.env.VITE_SERVER_URL}/assets/student2.png`} id="homeImg" />
         </div>
 
         <Footer/>
