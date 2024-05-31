@@ -1,5 +1,5 @@
 import express from "express"
-import { apply, deleteApplication, getAllEmployerApplications, getAllSeekerApplications, } from "../controllers/application.js"
+import { apply, deleteApplication, getAllEmployerApplications, getAllSeekerApplications } from "../controllers/application.js"
 import { isAuthorized } from "../middleware/auth.js"
 import { upload } from "../middleware/multer.js"
 
