@@ -41,10 +41,9 @@ app.use("/user",UserRouter)
 app.use("/job",JobRouter)
 app.use("/application",ApplicationRouter)
 
-app.get("/test",isAuthorized,(req,res)=>{
-  console.log("token:",req.cookies)
-  console.log("request body: ",req.body)
-  res.status(200)
+app.get("/",(req,res)=>{
+  
+  
 })
 
 app.listen(PORT,()=>{
