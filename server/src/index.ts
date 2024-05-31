@@ -6,7 +6,6 @@ import mongoose from 'mongoose'
 import 'dotenv/config'
 import UserRouter from "./routes/UserRoutes.js"
 import JobRouter from "./routes/JobRoutes.js"
-import { isAuthorized } from "./middleware/auth.js";
 import ApplicationRouter from "./routes/ApplicationRoutes.js"
 
 const PORT = 3000;
