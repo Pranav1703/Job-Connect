@@ -42,8 +42,7 @@ app.use("/job",JobRouter)
 app.use("/application",ApplicationRouter)
 
 app.get("/",(req,res)=>{
-  
-  
+  res.send("/server wokin")
 })
 
 app.listen(PORT,()=>{
