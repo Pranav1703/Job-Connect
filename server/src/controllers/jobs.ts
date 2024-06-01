@@ -49,7 +49,7 @@ export const getAllJobs = asyncHandler(async(req,res,next)=>{
           jobs,
         });
     } catch (error) {
-        console.log("fetching error----------------------------")
+        console.log("fetching error----------------------------",error)
     }
 })
 

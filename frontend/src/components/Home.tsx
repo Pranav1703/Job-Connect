@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import "../styles/Home.css"
 import { Context } from "../App";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 
@@ -14,11 +13,6 @@ const Home = () => {
 
 
   console.log("current auth status",user,":",isAuthorized)
-
-  const test = async()=>{
-    const resposne = await axios.get("http://localhost:3000/test",{ withCredentials:true })
-    console.log(resposne.data)
-  }
 
   useEffect(() => {
       if(!isAuthorized){

@@ -34,7 +34,7 @@ export const getAllJobs = asyncHandler(async (req, res, next) => {
         });
     }
     catch (error) {
-        console.log("fetching error----------------------------");
+        console.log("fetching error----------------------------", error);
     }
 });
 export const getJobById = asyncHandler(async (req, res, next) => {
