@@ -17,9 +17,11 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 const corsOptions = {
     origin: process.env.CORS_ORIGIN,
-    credentials: true
+    credentials: true,
+    METHODS: ["GET", "POST", "DELETE"]
 };
 app.use(cors(corsOptions));
+app.options("", cors(corsOptions));
 mongoose
     .connect(mongoUrl, {
     dbName: "jobBoardDb",

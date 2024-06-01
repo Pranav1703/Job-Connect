@@ -7,6 +7,7 @@ import 'dotenv/config'
 import UserRouter from "./routes/UserRoutes.js"
 import JobRouter from "./routes/JobRoutes.js"
 import ApplicationRouter from "./routes/ApplicationRoutes.js"
+import { METHODS } from "http";
 
 const PORT = 3000;
 const mongoUrl = process.env.MONGO_URL as string;
@@ -22,10 +23,12 @@ app.use(express.urlencoded({extended:true}))
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN,
-  credentials: true
+  credentials: true,
+  METHODS:["GET","POST","DELETE"]
 }
 
 app.use(cors(corsOptions))
+app.options("",cors(corsOptions))
 
 mongoose
 .connect(mongoUrl, {
