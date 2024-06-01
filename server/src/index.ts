@@ -7,7 +7,6 @@ import 'dotenv/config'
 import UserRouter from "./routes/UserRoutes.js"
 import JobRouter from "./routes/JobRoutes.js"
 import ApplicationRouter from "./routes/ApplicationRoutes.js"
-import { METHODS } from "http";
 
 const PORT = 3000;
 const mongoUrl = process.env.MONGO_URL as string;

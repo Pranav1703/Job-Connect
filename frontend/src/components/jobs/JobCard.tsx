@@ -36,14 +36,10 @@ const JobCard = ({_id,title,companyName,locationType,minSalary,maxSalary,descrip
     ]
     const postedMonth = months[parseInt(postendOn.slice(5,7),10)-1]
 
-    
-    console.log(postedMonth)
-
     if(postedMonth!==currentDate.slice(0,3)){ 
       return "Posted a month ago"
     }
     const number_of_days = parseInt(currentDate.slice(4,6),10) - parseInt(postendOn.slice(8),10)
-    console.log(number_of_days)
 
     return `Posted ${number_of_days} days ago`
   }
