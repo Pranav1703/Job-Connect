@@ -24,11 +24,12 @@ app.use(express.urlencoded({extended:true}))
 const corsOptions = {
   origin: process.env.CORS_ORIGIN,
   credentials: true,
-  METHODS:["GET","POST","DELETE"]
+  METHODS:["GET","POST","DELETE"],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }
 
 app.use(cors(corsOptions))
-app.options("",cors(corsOptions))
+app.options("*",cors(corsOptions))
 
 mongoose
 .connect(mongoUrl, {
