@@ -1,4 +1,4 @@
-# Job Board
+# Job Connect
 search for jobs or post job openings.
 
 ## How to Run locally
