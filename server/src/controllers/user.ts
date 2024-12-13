@@ -1,6 +1,12 @@
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { User } from "../models/user.js"
 
+const options = {
+    httpOnly: true ,
+    secure: true,
+    // sameSite: "none",
+    domain: 'job-connect-backend-je7f.onrender.com',
+}
 
 export const signUp = asyncHandler( async(req,res,next)=>{
     console.log(req.body)
@@ -26,11 +32,6 @@ export const signUp = asyncHandler( async(req,res,next)=>{
     })
 
     const token = user.generateToken()
-
-    const options = {
-        httpOnly: true,
-        secure: true
-    }
 
     res
     .status(200)
@@ -69,10 +70,7 @@ export const login = asyncHandler(async(req,res,next)=>{
 
     const token = user.generateToken()
     
-    const options = {
-        httpOnly: true,
-        secure: true
-    }
+
 
     res
     .status(200)
@@ -87,10 +85,6 @@ export const login = asyncHandler(async(req,res,next)=>{
 
 export const logOut = asyncHandler(async(req,res)=>{
 
-    const options = {
-        httpOnly: true,
-        secure: true
-    }
     
     res
     .status(200)
