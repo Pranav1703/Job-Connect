@@ -39,9 +39,7 @@ export const signUp = asyncHandler( async(req,res,next)=>{
         msg: "success",
         err: null
     })
-    
 
-    
 })
 
 export const login = asyncHandler(async(req,res,next)=>{

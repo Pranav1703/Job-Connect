@@ -58,7 +58,7 @@ const ImageModal =({src}:imgModalProp)=>{
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody m={'auto'}>
-            <img src={`${import.meta.env.VITE_SERVER_URL}/${src}`} alt="dfsdfdsdf" width={'700px'} style={{objectFit:"contain"}}/>
+            <img src={`${import.meta.env.VITE_SERVER_URL}/${src}`} alt="Resume Image" width={'700px'} style={{objectFit:"contain"}}/>
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -139,10 +139,9 @@ const ApplicationCard = ({
             </Text>
 
           </Flex>
-          <Box mt={'-25px'} maxHeight={'60%'} overflow={'auto'} >
+          <Box mt={'0px'} height={'60%'} maxHeight={'60%'} overflow={'auto'} >
             <Text fontWeight={'bold'} textAlign={'center'}>Cover Letter</Text>
             <Text wordBreak={'break-all'}>{coverLetter}</Text>
-          
           </Box>
     
         </VStack>
