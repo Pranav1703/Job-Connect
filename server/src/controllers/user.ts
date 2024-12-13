@@ -4,7 +4,7 @@ import { User } from "../models/user.js"
 const options = {
     httpOnly: true ,
     secure: true,
-    // sameSite: "none",
+    sameSite: "none" as "none", 
     domain: 'job-connect-backend-je7f.onrender.com',
 }
 
