@@ -5,7 +5,7 @@ const options = {
     httpOnly: true ,
     secure: true,
     sameSite: "none" as "none", 
-    domain: 'job-connect-backend-je7f.onrender.com',
+    maxAge: 24 * 60 * 60 * 1000
 }
 
 export const signUp = asyncHandler( async(req,res,next)=>{
@@ -92,4 +92,8 @@ export const logOut = asyncHandler(async(req,res)=>{
     .json({
         msg:"logged out"
     })
+})
+
+export const verify = asyncHandler(async(req,res)=>{
+    res.status(200).json({role: req.body.user})
 })

@@ -1,6 +1,7 @@
 import { 
     Box,
     Flex,
+    Heading,
     Spinner
 } from "@chakra-ui/react"
 import EmployerJobCard from "./EmployerJobCard"
@@ -35,7 +36,7 @@ const MyJobs = () => {
     
   return (
     <Box m={'1vw'} p={'1vw'} w={'100%'}>
-     
+      <Heading size={'xl'}>My Job List</Heading>
       <Flex m={'1vw'} direction={'column'}>
         {
           myJobs?(

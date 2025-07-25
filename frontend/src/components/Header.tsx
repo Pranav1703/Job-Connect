@@ -106,7 +106,6 @@ export default function Header() {
     navigate("/login")
   }
 
-
   return (
     <>
         <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} className={isAuthorized?'show':"hide"}>

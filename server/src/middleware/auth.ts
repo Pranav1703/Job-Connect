@@ -25,7 +25,8 @@ export const isAuthorized = asyncHandler(async(req:Request, res:Response, next:N
         next()
 
     } catch (error) {
-        console.log("error at auth handler: ",error)
+        console.log("error at auth handler: ",error);
+        next(new Error("Invalid or expired token"));
     }
 
 })
