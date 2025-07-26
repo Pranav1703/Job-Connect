@@ -42,10 +42,7 @@ type ApplicationCardProps = {
   applicationListSetFunc: React.Dispatch<React.SetStateAction<any[] | undefined>>
 }
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 
 const ImageModal =({src}:imgModalProp)=>{
