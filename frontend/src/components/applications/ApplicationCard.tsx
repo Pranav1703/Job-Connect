@@ -49,7 +49,7 @@ const ImageModal =({src}:imgModalProp)=>{
   const { isOpen, onOpen, onClose } = useDisclosure()
   // const fileUrl = `${import.meta.env.VITE_SERVER_URL}/${src}`
   const fileUrl = `${src}`
-  console.log("fileUrl:", fileUrl)
+  // console.log("fileUrl:", fileUrl)
 
   const handlePdfError = (err:Error) => {
     console.error("PDF load/render error:", err.message);
@@ -98,7 +98,6 @@ const ImageModal =({src}:imgModalProp)=>{
     </>
   )
 }
-
 
 const ApplicationCard = ({
   applicationID,

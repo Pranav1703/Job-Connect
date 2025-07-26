@@ -15,6 +15,10 @@ install the dependencies
 ```
 npm i
 ```
+create and set env file in /frontend/
+```
+VITE_SERVER_URL={"server url here"}
+```
 
 now, start the application by running this command 
 
@@ -30,6 +34,13 @@ cd server
 install the dependencies
 ```
 npm i
+```
+create and set env in /server/
+```
+CORS_ORIGIN="{frontend url here}"
+MONGO_URL="{mongodb uri here}"
+TOKEN_SECRET={"secret string"}
+TOKEN_EXPIRY={"time period in days"}
 ```
 
 start the server by running this command

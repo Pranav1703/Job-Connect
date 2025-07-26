@@ -69,9 +69,7 @@ export const login = asyncHandler(async(req,res,next)=>{
     }
 
     const token = user.generateToken()
-    
-
-
+   
     res
     .status(200)
     .cookie("token",token,options)
@@ -85,7 +83,6 @@ export const login = asyncHandler(async(req,res,next)=>{
 
 export const logOut = asyncHandler(async(req,res)=>{
 
-    
     res
     .status(200)
     .clearCookie('token',options)
