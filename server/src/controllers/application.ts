@@ -2,10 +2,10 @@ import { Application } from "../models/application.js";
 import { Job } from "../models/jobs.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import 'dotenv/config'
-import AWS from 'aws-sdk';
-import {upload} from "../middleware/multer.js"
+import { S3Client, PutObjectCommandInput } from "@aws-sdk/client-s3";
+import { Upload } from "@aws-sdk/lib-storage";
 
-const s3 = new AWS.S3({ region: 'ap-south-1' });
+const s3Client = new S3Client({ region: 'ap-south-1' });
 
 export const apply = asyncHandler(async(req,res,next)=>{
     
@@ -35,24 +35,32 @@ export const apply = asyncHandler(async(req,res,next)=>{
     if (!req.file) {
         return next(new Error("Resume file missing"));
     }
-
-    // Upload to S3
-    const s3Params = {
-        Bucket: 'jobboard-rb',
-        Key: `resumes/${Date.now()}-${req.file.originalname}`, 
-        Body: req.file.buffer,
-        ContentType: req.file.mimetype,
-        ACL: 'public-read' 
-    };
-
-    console.log(req.file!)
     // const { filename } = req.file!
     // const resumePath = `storage/${filename}`
-
+    // Upload to S3
+    
+    console.log(req.file!)
+    
+    
     let resumePath;
     try {
-        const uploadResult = await s3.upload(s3Params).promise();
+        // 3. Use the new managed uploader from lib-storage
+        const s3Params: PutObjectCommandInput = {
+            Bucket: 'jobboard-rb',
+            Key: `resumes/${Date.now()}-${req.file.originalname}`,
+            Body: req.file.buffer,
+            ContentType: req.file.mimetype,
+            ACL: 'public-read' 
+        };
+        
+        const parallelUploads3 = new Upload({
+            client: s3Client,
+            params: s3Params,
+        });
+
+        const uploadResult = await parallelUploads3.done();
         resumePath = uploadResult.Location; // S3 public URL
+
     } catch (err) {
         console.error("S3 upload failed", err);
         return next(new Error("Resume upload failed"));
