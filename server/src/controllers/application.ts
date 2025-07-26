@@ -50,7 +50,6 @@ export const apply = asyncHandler(async(req,res,next)=>{
             Key: `resumes/${Date.now()}-${req.file.originalname}`,
             Body: req.file.buffer,
             ContentType: req.file.mimetype,
-            ACL: 'public-read' 
         };
         
         const parallelUploads3 = new Upload({
