@@ -47,7 +47,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 
 const ImageModal =({src}:imgModalProp)=>{
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const fileUrl = `${import.meta.env.VITE_SERVER_URL}/${src}`
+  // const fileUrl = `${import.meta.env.VITE_SERVER_URL}/${src}`
+  const fileUrl = `${src}`
   console.log("fileUrl:", fileUrl)
 
   const handlePdfError = (err:Error) => {

@@ -2,6 +2,10 @@ import { Application } from "../models/application.js";
 import { Job } from "../models/jobs.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import 'dotenv/config'
+import AWS from 'aws-sdk';
+import {upload} from "../middleware/multer.js"
+
+const s3 = new AWS.S3({ region: 'ap-south-1' });
 
 export const apply = asyncHandler(async(req,res,next)=>{
     
@@ -27,9 +31,32 @@ export const apply = asyncHandler(async(req,res,next)=>{
         role: "Employer"
     }
 
+    
+    if (!req.file) {
+        return next(new Error("Resume file missing"));
+    }
+
+    // Upload to S3
+    const s3Params = {
+        Bucket: 'jobboard-rb',
+        Key: `resumes/${Date.now()}-${req.file.originalname}`, 
+        Body: req.file.buffer,
+        ContentType: req.file.mimetype,
+        ACL: 'public-read' 
+    };
+
     console.log(req.file!)
-    const { filename } = req.file!
-    const resumePath = `storage/${filename}`
+    // const { filename } = req.file!
+    // const resumePath = `storage/${filename}`
+
+    let resumePath;
+    try {
+        const uploadResult = await s3.upload(s3Params).promise();
+        resumePath = uploadResult.Location; // S3 public URL
+    } catch (err) {
+        console.error("S3 upload failed", err);
+        return next(new Error("Resume upload failed"));
+    }
 
     if(!name || 
         !email ||
