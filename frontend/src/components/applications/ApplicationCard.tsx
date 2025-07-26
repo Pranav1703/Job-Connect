@@ -48,18 +48,15 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 
-function PdfToImage({ pdfUrl }:{pdfUrl:string}) {
-  return (
-    <Document file={pdfUrl}>
-      <Page pageNumber={1} width={700} />
-    </Document>
-  );
-}
-
-
 const ImageModal =({src}:imgModalProp)=>{
   const { isOpen, onOpen, onClose } = useDisclosure()
   const fileUrl = `${import.meta.env.VITE_SERVER_URL}/${src}`
+  console.log("fileUrl:", fileUrl)
+
+  const handlePdfError = (err:Error) => {
+    console.error("PDF load/render error:", err.message);
+  };
+
   return (
         <>
       {/* Thumbnail preview - small size, click to open modal */}
@@ -72,7 +69,9 @@ const ImageModal =({src}:imgModalProp)=>{
         borderRadius="md"
         overflow="hidden"
       >
-        <Document file={fileUrl}
+        <Document file={fileUrl}                  
+        onLoadError={handlePdfError}
+        onSourceError={handlePdfError}
         >
           <Page pageNumber={1} width={200} />
         </Document>
@@ -86,7 +85,11 @@ const ImageModal =({src}:imgModalProp)=>{
           <ModalCloseButton />
           <ModalBody display="flex" justifyContent="center" alignItems="center">
             <Box maxH="80vh" overflow="auto">
-              <Document file={fileUrl}>
+              <Document 
+                file={fileUrl}
+                  onLoadError={handlePdfError}
+                  onSourceError={handlePdfError}
+              >
                 <Page pageNumber={1} width={800} />
               </Document>
             </Box>
