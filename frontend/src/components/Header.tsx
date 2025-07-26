@@ -18,7 +18,7 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 import { useNavigate ,Link} from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Context } from '../App'
 import "../styles/Header.css"
 
@@ -90,10 +90,22 @@ export default function Header() {
   
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
-
+  const [Links,setLinks] = useState<Array<any>>()
   const {user,isAuthorized,setIsAuthorized} = useContext(Context)
+  console.log("...",user)
 
-  const Links = user.role==="Job Seeker"? seekerLinks:user.role==="Employer"? employerLinks : []
+  useEffect(() => {
+     
+      if (user && user.role) {
+    if (user.role === "Job Seeker") {
+      setLinks(seekerLinks)
+    } else if (user.role === "Employer") {
+      setLinks(employerLinks)
+    }
+  }
+
+  }, [user])
+  
 
   const logOutHandler = async()=>{
     try {
@@ -120,7 +132,7 @@ export default function Header() {
             <HStack spacing={0} alignItems={'center'} justifyContent={'space-between'} w={'59%'}>
               <Box fontSize={'larger'} fontWeight={'500'} fontFamily={'"Archivo Black", sans-serif'}>Job Connect</Box>
               <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-                {Links.map((i) => (
+                {Links && Links.map((i) => (
                   <NavLink key={i.link} href={i.path}>{i.link}</NavLink>
                 ))}
               </HStack>
@@ -143,7 +155,7 @@ export default function Header() {
           {isOpen ? (
             <Box pb={4} display={{ md: 'none' }}>
               <Stack as={'nav'} spacing={4}>
-                {Links.map((i) => (
+                {Links && Links.map((i) => (
                   <NavLink key={i.link} href={i.path}>{i.link}</NavLink>
                 ))}
               </Stack>

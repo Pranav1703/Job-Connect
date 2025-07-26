@@ -14,6 +14,7 @@ import axios from "axios"
 import { MouseEvent, useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Context } from "../../App"
+import toast from "react-hot-toast"
 
 const ApplicationForm = () => {
 
@@ -70,6 +71,9 @@ const ApplicationForm = () => {
         setResume(undefined)
         setErrMsg(false)
         setResume(undefined)
+
+        toast.success("Successfully applied.")
+        navigate("/jobs")
       }else{
         setErrMsg(true)
       }

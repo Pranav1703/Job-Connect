@@ -7,14 +7,12 @@ import 'dotenv/config'
 import UserRouter from "./routes/UserRoutes.js"
 import JobRouter from "./routes/JobRoutes.js"
 import ApplicationRouter from "./routes/ApplicationRoutes.js"
+import { METHODS } from "http";
 
 const PORT = 3000;
 const mongoUrl = process.env.MONGO_URL as string;
 
 const app = express();
-
-app.use("/assets",express.static('assets'));
-app.use("/storage",express.static('src/storage'));
 
 app.use(bodyParser.json())
 app.use(cookieParser())
@@ -29,6 +27,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 app.options("*",cors(corsOptions))
+
+app.use("/assets",express.static('assets'));
+app.use("/storage",express.static('src/storage'));
 
 mongoose
 .connect(mongoUrl, {

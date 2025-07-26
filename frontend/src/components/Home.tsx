@@ -12,8 +12,6 @@ const Home = () => {
   const navigate = useNavigate()
 
 
-  console.log("current auth status",user,":",isAuthorized)
-
   useEffect(() => {
       if(!isAuthorized){
         navigate("/login")

@@ -20,6 +20,9 @@ import { Context } from "../../App"
 import { DeleteIcon } from "@chakra-ui/icons"
 import axios from "axios"
 import toast from "react-hot-toast"
+import { pdfjs,Document, Page } from 'react-pdf';
+import 'pdfjs-dist/web/pdf_viewer.css';
+
 
 type imgModalProp = {
   src: string
@@ -39,34 +42,61 @@ type ApplicationCardProps = {
   applicationListSetFunc: React.Dispatch<React.SetStateAction<any[] | undefined>>
 }
 
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 
+function PdfToImage({ pdfUrl }:{pdfUrl:string}) {
+  return (
+    <Document file={pdfUrl}>
+      <Page pageNumber={1} width={700} />
+    </Document>
+  );
+}
 
 
 const ImageModal =({src}:imgModalProp)=>{
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const fileUrl = `${import.meta.env.VITE_SERVER_URL}/${src}`
   return (
-    <>
-      <img src={`${import.meta.env.VITE_SERVER_URL}/${src}`} width={'200px'} style={{objectFit:"contain"}} alt="fytssfgsfdg" onClick={onOpen}/>
+        <>
+      {/* Thumbnail preview - small size, click to open modal */}
+      <Box
+        width="200px"
+        height="auto"
+        cursor="pointer"
+        onClick={onOpen}
+        border="1px solid #ccc"
+        borderRadius="md"
+        overflow="hidden"
+      >
+        <Document file={fileUrl}
+        >
+          <Page pageNumber={1} width={200} />
+        </Document>
+      </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} >
+      {/* Modal with full-size PDF preview */}
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
         <ModalOverlay />
-        <ModalContent m={'auto'}  height={'700px'} width={'1000px'}>
-          <ModalHeader textAlign={"center"}>
-            Modal Title
-
-          </ModalHeader>
+        <ModalContent maxH="90vh" overflow="hidden">
+          <ModalHeader>Resume Preview</ModalHeader>
           <ModalCloseButton />
-          <ModalBody m={'auto'}>
-            <img src={`${import.meta.env.VITE_SERVER_URL}/${src}`} alt="Resume Image" width={'700px'} style={{objectFit:"contain"}}/>
+          <ModalBody display="flex" justifyContent="center" alignItems="center">
+            <Box maxH="80vh" overflow="auto">
+              <Document file={fileUrl}>
+                <Page pageNumber={1} width={800} />
+              </Document>
+            </Box>
           </ModalBody>
         </ModalContent>
       </Modal>
+
     </>
   )
 }
-
-
 
 
 const ApplicationCard = ({

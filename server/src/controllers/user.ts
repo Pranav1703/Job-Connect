@@ -95,5 +95,5 @@ export const logOut = asyncHandler(async(req,res)=>{
 })
 
 export const verify = asyncHandler(async(req,res)=>{
-    res.status(200).json({role: req.body.user})
+    res.status(200).json({role: req.body.user.role})
 })

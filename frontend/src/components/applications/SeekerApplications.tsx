@@ -20,7 +20,6 @@ const SeekerApplications = () => {
     axios.get(`${import.meta.env.VITE_SERVER_URL}/application/jobseeker/getMyApplications`,{withCredentials:true})
         .then((res)=>{
           setMyApplications(res.data.applications);
-          console.log(res.data.applications)
          
         })
         .catch((err)=>console.log("couldnt fetch",err));
